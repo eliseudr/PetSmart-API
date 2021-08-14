@@ -1,0 +1,30 @@
+{
+  "name": "FormBuilder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --runInBand",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliseudr/FormBuilder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliseudr/FormBuilder/issues"
+  },
+  "homepage": "https://github.com/eliseudr/FormBuilder#readme",
+  "dependencies": {
+    "dateformat": "^4.5.1",
+    "express": "^4.17.1",
+    "jest": "^27.0.1",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.3.4",
+    "supertest": "^6.1.3"
+  }
+}
