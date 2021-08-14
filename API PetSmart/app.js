@@ -2,10 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const port = 3000;
 
+const criarLoginRoutes = require("./api/routes/criar_login");
 const loginRoutes = require("./api/routes/login");
 
-const buildForm = require("./api/routes/build_form");
-const buildFormInfo = require("./api/routes/build_form_info");
 const strings = require("./api/helpers/strings");
 
 const app = express();
@@ -19,10 +18,9 @@ console.log(`${strings.servidorRodando} ${port}`);
 
 // Endpoints
 // ----------------------------------------------------------------
-app.use("/login", loginRoutes);
+app.use("/criar_login", criarLoginRoutes);
+app.use("/login", loginRoutes)
 
-app.use("/build_form", buildForm);
-app.use("/form_info", buildFormInfo);
 // ----------------------------------------------------------------
 
 // Trata o erro 404 de endpoint não encontrado.

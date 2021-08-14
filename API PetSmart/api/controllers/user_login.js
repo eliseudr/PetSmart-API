@@ -1,28 +1,55 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const UserLogin = require("../models/user_login");
+const Usuario = require("../models/usuario");
 const helpers = require("../helpers/helpers");
 const strings = require("../helpers/strings");
+const bcrypt = require("bcrypt");
+
+function verificarSenha_(req, res, usuarioLogin) {
+  bcrypt.compare(req.body.senha, usuarioLogin.senha, function (err, result) {
+    if (result) {
+      const token = jwt.sign(
+        {
+          cpf: usuarioLogin.cpf,
+          id_pessoa: usuarioLogin.id_pessoa,
+        },
+        constants.JWT_KEY,
+        {
+          expiresIn: "365 days",
+        }
+      );
+      res.status(200).send({
+        mensagem: strings.msgUsuarioLogadoSucesso,
+        token: token,
+        pessoa: {
+          nome: usuarioLogin.nome,
+          cpf: usuarioLogin.cpf,
+        },
+      });
+    } else {
+      res.status(401).send({ error: strings.errorSenhaIncorreta });
+    }
+  });
+}
 
 module.exports = {
-  async create(req, res) {
-    var sequelize = helpers.getSequelize(req.query.nomedb);
+  async login(req, res) {
+    const sequelize = helpers.getSequelize(req.query.nomedb);
     try {
-      await UserLogin(
+      const usuarioLogin = await Usuario(
         sequelize,
         Sequelize.DataTypes,
-      ).create({
-        email: req.body.email,
-        cpf: req.body.cpf,
-        usuario: req.body.usuario,
-        senha: req.body.senha,
-        cliente: req.body.cliente,
-        fornecedor: req.body.fornecedor,
+      ).findOne({
+        where: { cpf: req.body.cpf },
       });
-      res.status(200).send(strings.usuarioCriado);
+      if (usuarioLogin !== null) {
+        verificarSenha_(req, res, usuarioLogin);
+      } else {
+        res.status(401).send({ error: strings.errorUsuarioNaoEncontrado });
+      }
     } catch (error) {
-      console.log(error);
       res.status(500).send({ error: error });
+    } finally {
+      sequelize.close();
     }
-    sequelize.close();
   },
 };
