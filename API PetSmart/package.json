@@ -20,6 +20,7 @@
   "homepage": "https://github.com/eliseudr/FormBuilder#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cpf-cnpj-validator": "^1.0.3",
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "jest": "^27.0.1",

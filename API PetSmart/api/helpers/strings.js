@@ -14,5 +14,6 @@ module.exports = Object.freeze({
   errorUsuarioNaoEncontrado: "Usuário nao encontrado ou CPF incorreto",
   errorSenhaIncorreta: "Senha incorreta",
   errorUsuarioJaExiste:
-    "CPF já cadastrado, utilize o recuperar senha ou utilize outro CPF",
+    "CPF já cadastrado, recupere a senha ou cadastre outro CPF",
+  errorCpfInvalido: "CPF invalido",
 });
