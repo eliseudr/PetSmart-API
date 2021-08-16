@@ -16,20 +16,31 @@ module.exports = {
   async create(req, res) {
     var sequelize = helpers.getSequelize(req.query.nomedb);
     try {
-      await Usuario(sequelize, Sequelize.DataTypes).create({
-        email: req.body.email,
-        nome: req.body.nome,
-        cpf: req.body.cpf,
-        // Codigicar senha em base64
-        senha: await codificarSenha_(req, res),
-        cliente: req.body.cliente,
-        fornecedor: req.body.fornecedor,
+      const usuarioRepetido = await Usuario(
+        sequelize,
+        Sequelize.DataTypes
+      ).findOne({
+        where: {
+          cpf: req.body.cpf,
+        },
       });
-      res.status(200).send(strings.usuarioCriado);
+      if (usuarioRepetido === null) {
+        await Usuario(sequelize, Sequelize.DataTypes).create({
+          email: req.body.email,
+          nome: req.body.nome,
+          cpf: req.body.cpf,
+          senha: await codificarSenha_(req, res),
+          cliente: req.body.cliente,
+          fornecedor: req.body.fornecedor,
+        });
+        res.status(200).send(strings.usuarioCriado);
+      } else {
+        res.status(401).send({ error: strings.errorUsuarioJaExiste });
+      }
     } catch (error) {
-      console.log(error);
       res.status(500).send({ error: error });
+    } finally {
+      sequelize.close();
     }
-    sequelize.close();
   },
 };
