@@ -1,8 +1,12 @@
+/** @format */
+
 const { Sequelize, DataTypes } = require("sequelize");
 const Usuario = require("../models/usuario");
 const helpers = require("../helpers/helpers");
 const strings = require("../helpers/strings");
+const constants = require("../helpers/constants");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 function verificarSenha_(req, res, usuarioLogin) {
   bcrypt.compare(req.body.senha, usuarioLogin.senha, function (err, result) {
@@ -37,7 +41,7 @@ module.exports = {
     try {
       const usuarioLogin = await Usuario(
         sequelize,
-        Sequelize.DataTypes,
+        Sequelize.DataTypes
       ).findOne({
         where: { cpf: req.body.cpf },
       });
