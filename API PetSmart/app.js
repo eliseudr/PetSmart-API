@@ -1,9 +1,12 @@
+/** @format */
+
 const express = require("express");
 const morgan = require("morgan");
 const port = 3000;
 
 const criarLoginRoutes = require("./api/routes/criar_login");
 const loginRoutes = require("./api/routes/login");
+const checkAuth = require("./api/middlewares/check-auth");
 
 const strings = require("./api/helpers/strings");
 
@@ -19,7 +22,9 @@ console.log(`${strings.servidorRodando} ${port}`);
 // Endpoints
 // ----------------------------------------------------------------
 app.use("/criar_login", criarLoginRoutes);
-app.use("/login", loginRoutes)
+app.use("/login", checkAuth, loginRoutes);
+
+app.use("/pets", petsRoutes);
 
 // ----------------------------------------------------------------
 
@@ -32,10 +37,10 @@ app.use((req, res, next) => {
 
 // Todos os outros erros são passados para aqui e designados como erro interno do servidor (500).
 app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
-      error: error.message,
-    });
+  res.status(error.status || 500);
+  res.json({
+    error: error.message,
   });
+});
 
 module.exports = app;
