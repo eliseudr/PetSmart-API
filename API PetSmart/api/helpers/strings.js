@@ -5,9 +5,16 @@
 module.exports = Object.freeze({
   usuarioCriado: "Usuário criado com sucesso",
   servidorRodando: "Servidor está rodando na porta",
+  petRegistrado: "Pet registrado!",
 
   // Mensagem
   msgUsuarioLogadoSucesso: "Usuário logado com sucesso",
+
+  // Editado
+  msgPetEditado: "As informaçoes do seu Pet foram alteradas!",
+
+  // Remoção
+  msgPetRemovido: "O pet foi removido!",
 
   // Error
   errorNotFound: "Not Found",
