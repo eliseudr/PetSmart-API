@@ -6,6 +6,7 @@ const port = 3000;
 
 const criarLoginRoutes = require("./api/routes/criar_login");
 const loginRoutes = require("./api/routes/login");
+const petsRoutes = require("./api/routes/pets");
 const checkAuth = require("./api/middlewares/check-auth");
 
 const strings = require("./api/helpers/strings");
@@ -22,9 +23,9 @@ console.log(`${strings.servidorRodando} ${port}`);
 // Endpoints
 // ----------------------------------------------------------------
 app.use("/criar_login", criarLoginRoutes);
-app.use("/login", checkAuth, loginRoutes);
+app.use("/login", loginRoutes);
 
-app.use("/pets", petsRoutes);
+app.use("/pets", checkAuth, petsRoutes);
 
 // ----------------------------------------------------------------
 

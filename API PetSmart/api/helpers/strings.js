@@ -23,4 +23,5 @@ module.exports = Object.freeze({
   errorUsuarioJaExiste:
     "CPF já cadastrado, recupere a senha ou cadastre outro CPF",
   errorCpfInvalido: "CPF invalido",
+  errorTokenInvalido: "Token inválido",
 });

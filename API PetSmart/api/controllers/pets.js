@@ -1,8 +1,18 @@
 /** @format */
 
 const { Sequelize, DataTypes } = require("sequelize");
+const Pets = require("../models/pets");
 const helpers = require("../helpers/helpers");
 const strings = require("../helpers/strings");
+
+function getFiltro_(req) {
+  let jsonObj = {
+    where: {
+      ativo: true,
+    },
+  };
+  return jsonObj;
+}
 
 module.exports = {
   async getAll(req, res) {
@@ -40,10 +50,10 @@ module.exports = {
     var sequelize = helpers.getSequelize(req.query.nomedb);
     try {
       await Pets(sequelize, Sequelize.DataTypes).create({
-        apelido: req.query.apelido,
-        idade: req.query.idade,
-        raca: req.query.raca,
-        id_usuario: req.query.id_usuario,
+        apelido: req.body.apelido,
+        idade: req.body.idade,
+        raca: req.body.raca,
+        id_usuario: req.body.id_usuario,
       });
       res.status(200).send(strings.petRegistrado);
     } catch (error) {
@@ -58,10 +68,10 @@ module.exports = {
     try {
       await Pets(sequelize, Sequelize.DataTypes).update(
         {
-          apelido: req.query.apelido,
-          idade: req.query.idade,
-          raca: req.query.raca,
-          id_usuario: req.query.id_usuario,
+          apelido: req.body.apelido,
+          idade: req.body.idade,
+          raca: req.body.raca,
+          id_usuario: req.body.id_usuario,
         },
         { where: { id: req.params.id } }
       );
@@ -77,7 +87,7 @@ module.exports = {
   async delete(req, res) {
     var sequelize = helpers.getSequelize(req.query.nomedb);
     try {
-      await pets(sequelize, Sequelize.DataTypes).update(
+      await Pets(sequelize, Sequelize.DataTypes).update(
         {
           ativo: false,
         },
