@@ -14,7 +14,7 @@ function verificarSenha_(req, res, usuarioLogin) {
       const token = jwt.sign(
         {
           cpf: usuarioLogin.cpf,
-          id_pessoa: usuarioLogin.id_pessoa,
+          id: usuarioLogin.id,
         },
         constants.JWT_KEY,
         {
@@ -25,6 +25,7 @@ function verificarSenha_(req, res, usuarioLogin) {
         mensagem: strings.msgUsuarioLogadoSucesso,
         token: token,
         pessoa: {
+          id: usuarioLogin.id,
           nome: usuarioLogin.nome,
           cpf: usuarioLogin.cpf,
         },
