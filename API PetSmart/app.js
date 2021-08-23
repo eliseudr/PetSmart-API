@@ -7,6 +7,7 @@ const port = 3000;
 const criarLoginRoutes = require("./api/routes/criar_login");
 const loginRoutes = require("./api/routes/login");
 const petsRoutes = require("./api/routes/pets");
+const usuariosRoutes = require("./api/routes/usuarios");
 const checkAuth = require("./api/middlewares/check-auth");
 
 const strings = require("./api/helpers/strings");
@@ -26,7 +27,7 @@ app.use("/criar_login", criarLoginRoutes);
 app.use("/login", loginRoutes);
 
 app.use("/pets", checkAuth, petsRoutes);
-
+app.use("/usuarios", checkAuth, usuariosRoutes);
 // ----------------------------------------------------------------
 
 // Trata o erro 404 de endpoint não encontrado.

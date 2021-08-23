@@ -1,4 +1,6 @@
-const express = require("express"); 
+/** @format */
+
+const express = require("express");
 const userLoginController = require("../controllers/criar_user_login");
 
 const router = express.Router();
