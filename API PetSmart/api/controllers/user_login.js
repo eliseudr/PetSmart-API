@@ -28,6 +28,9 @@ function verificarSenha_(req, res, usuarioLogin) {
           id: usuarioLogin.id,
           nome: usuarioLogin.nome,
           cpf: usuarioLogin.cpf,
+          // !! utilizado para converter o INTEGER EM BOOL
+          conta_cliente: !!usuarioLogin.cliente,
+          conta_fornecedor: !!usuarioLogin.fornecedor,
         },
       });
     } else {
