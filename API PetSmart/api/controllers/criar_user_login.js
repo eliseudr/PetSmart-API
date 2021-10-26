@@ -29,7 +29,7 @@ module.exports = {
 
       // Valida Cpf
       cpfValido = cpf.isValid(req.body.cpf);
-      console.log(cpfValido);
+      console.log("CPF é valido ? " + cpfValido);
 
       if (cpfValido === false) {
         res.status(401).send({ error: strings.errorCpfInvalido });

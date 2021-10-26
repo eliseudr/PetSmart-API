@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes, nomeTable = "pets") => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      mes: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
       raca: {
         type: DataTypes.STRING,
         allowNull: false,
