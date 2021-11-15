@@ -51,7 +51,7 @@ module.exports = {
     try {
       await Pets(sequelize, Sequelize.DataTypes).create({
         apelido: req.body.apelido,
-        idade: req.body.idade,
+        nascimento: req.body.nascimento,
         raca: req.body.raca,
         id_usuario: req.body.id_usuario,
       });
@@ -69,7 +69,7 @@ module.exports = {
       await Pets(sequelize, Sequelize.DataTypes).update(
         {
           apelido: req.body.apelido,
-          idade: req.body.idade,
+          nascimento: req.body.nascimento,
           raca: req.body.raca,
           id_usuario: req.body.id_usuario,
         },

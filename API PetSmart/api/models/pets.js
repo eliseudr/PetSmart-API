@@ -12,12 +12,8 @@ module.exports = (sequelize, DataTypes, nomeTable = "pets") => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      idade: {
+      nascimento: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      mes: {
-        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
       raca: {
