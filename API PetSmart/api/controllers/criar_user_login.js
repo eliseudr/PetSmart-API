@@ -43,12 +43,13 @@ module.exports = {
             cliente: req.body.cliente,
             fornecedor: req.body.fornecedor,
           });
-          res.status(200).send(strings.usuarioCriado);
+          res.status(200).send({ usuarioCriado: strings.usuarioCriado });
         } else {
           res.status(401).send({ error: strings.errorUsuarioJaExiste });
         }
       }
     } catch (error) {
+      console.log(error);
       res.status(500).send({ error: error });
     } finally {
       sequelize.close();
