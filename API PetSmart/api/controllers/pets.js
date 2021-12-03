@@ -55,7 +55,7 @@ module.exports = {
         raca: req.body.raca,
         id_usuario: req.body.id_usuario,
       });
-      res.status(200).send(strings.petRegistrado);
+      res.status(200).send({ registrado: strings.petRegistrado });
     } catch (error) {
       res.status(500).send({ error: error });
     } finally {
