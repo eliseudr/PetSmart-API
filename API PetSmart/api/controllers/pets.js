@@ -4,6 +4,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const Pets = require("../models/pets");
 const helpers = require("../helpers/helpers");
 const strings = require("../helpers/strings");
+const constants = require("../helpers/constants");
 
 function getFiltro_(req) {
   let jsonObj = {
@@ -11,6 +12,9 @@ function getFiltro_(req) {
       ativo: true,
     },
   };
+  if (req.query.id_usuario !== undefined) {
+    jsonObj.where[constants.ID_USUARIO] = req.query.id_usuario;
+  }
   return jsonObj;
 }
 
