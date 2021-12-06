@@ -3,31 +3,20 @@
 "use strict";
 const { Model } = require("sequelize");
 
-module.exports = (sequelize, DataTypes, nomeTable = "agendamentos") => {
+module.exports = (sequelize, DataTypes, nomeTable = "view_agendamentos") => {
   class Agendamento extends Model {}
   Agendamento.init(
     {
       // Column ID auto generated
-      tipo_agendamento: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      data_agendamento: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      id_pet: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      id_fornecedor: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      id_usuario: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      tipo_agendamento: DataTypes.STRING,
+      id_pet: DataTypes.INTEGER,
+      nome_pet: DataTypes.STRING,
+      raca: DataTypes.STRING,
+      data_agendamento: DataTypes.STRING,
+      id_usuario: DataTypes.INTEGER,
+      nome_cliente: DataTypes.STRING,
+      id_fornecedor: DataTypes.INTEGER,
+      nome_fornecedor: DataTypes.STRING,
     },
     {
       sequelize,

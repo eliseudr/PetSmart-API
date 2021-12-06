@@ -6,7 +6,32 @@ const helpers = require("../helpers/helpers");
 const strings = require("../helpers/strings");
 const constants = require("../helpers/constants");
 
+function getFiltro_(req) {
+  let jsonObj = {
+    where: {},
+  };
+  if (req.query.id_fornecedor !== undefined) {
+    jsonObj.where[constants.ID_FORNECEDOR] = req.query.id_fornecedor;
+  }
+  return jsonObj;
+}
+
 module.exports = {
+  async getAll(req, res) {
+    const sequelize = helpers.getSequelize(req.query.nomedb);
+    try {
+      const pets = await Agendamentos(sequelize, Sequelize.DataTypes).findAll(
+        getFiltro_(req)
+      );
+      res.status(200).send(pets || {});
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ error: error });
+    } finally {
+      sequelize.close();
+    }
+  },
+
   async getById(req, res) {
     const sequelize = helpers.getSequelize(req.query.nomedb);
     try {
